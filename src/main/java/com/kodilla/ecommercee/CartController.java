@@ -29,7 +29,7 @@ public class CartController {
     public void deleteFromCart(@RequestParam Long cartId, @RequestParam Long productId) {
     }
 
-    @PostMapping(value = "createOrder", consumes = "application/json")
+    @PostMapping(value = "orders", consumes = "application/json")
     public void createOrder(@RequestParam ProductDto productDto) {
     }
 
