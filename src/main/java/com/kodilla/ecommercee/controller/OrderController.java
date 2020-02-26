@@ -10,30 +10,30 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("api/v1/ecommercee")
 public class OrderController {
 
-    @GetMapping("/getOrders")
+    @GetMapping("/orders")
     public List<OrderDto> getOrders() {
         return new ArrayList<>();
     }
 
-    @GetMapping("/getOrderById/{id}")
+    @GetMapping("/orders/{id}")
     public OrderDto getOrderById(@PathVariable("id") Long id) {
         return new OrderDto();
     }
 
-    @DeleteMapping("/deleteOrderById/{id}")
+    @DeleteMapping("/orders/{id}")
     public void deleteOrderById(@PathVariable("id") Long id) {
 
     }
 
-    @PutMapping("/updateOrderById/{id}")
+    @PutMapping("/orders/{id}")
     public OrderDto updateOrderById(@PathVariable("id") Long id) {
         return new OrderDto();
     }
 
-    @PostMapping(path = "/createOrder", consumes=APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/orders", consumes=APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public void createOrder(@RequestBody OrderDto orderDto) {
 
     }

@@ -11,30 +11,30 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("api/v1/ecommercee")
 public class UserController {
 
-    @GetMapping("/getUsers")
+    @GetMapping("/users")
     public List<UserDto> getUsers() {
         return new ArrayList<>();
     }
 
-    @GetMapping("/getUserById/{id}")
+    @GetMapping("/users/{id}")
     public UserDto getUserById(@PathVariable("id") Long id) {
         return new UserDto();
     }
 
-    @DeleteMapping("/deleteUserById/{id}")
+    @DeleteMapping("/users/{id}")
     public void deleteUserById(@PathVariable("id") Long id) {
 
     }
 
-    @PutMapping("/updateUserById/{id}")
+    @PutMapping("/users/{id}")
     public UserDto updateUserById(@PathVariable("id") Long id) {
         return new UserDto();
     }
 
-    @PostMapping(path = "/createUser", consumes=APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/users", consumes=APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDTO) {
 
     }
