@@ -1,13 +1,11 @@
 package com.kodilla.ecommercee.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
@@ -15,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Product {
 
     @Column(name = "id")
@@ -28,7 +27,7 @@ public class Product {
 
     @Column(name = "price")
     @NotNull
-    private double price;
+    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
@@ -40,21 +39,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-
-    public Product(@NotNull String name, @NotNull double price, String description, Group productGroup, Cart cart) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.productGroup = productGroup;
-        this.cart = cart;
-    }
-
-    public Product(@NotNull String name, @NotNull double price, String description, Group productGroup) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.productGroup = productGroup;
-    }
 
     @Override
     public String toString() {
