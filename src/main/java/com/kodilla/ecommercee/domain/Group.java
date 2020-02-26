@@ -1,20 +1,18 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "productGroups")
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
+@Entity
+@Builder
+@Table(name = "product_groups")
 public class Group {
 
     @Id
@@ -23,7 +21,7 @@ public class Group {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "productGroup")
+    @OneToMany(mappedBy = "product_groups")
     private List<Product> products = new ArrayList<>();
 
     public Group(String name, String description) {
