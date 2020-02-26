@@ -8,28 +8,28 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("v1/ecommercee")
+@RequestMapping("api/v1/ecommercee")
 @Transactional
 public class CartController {
 
-    @RequestMapping(method = RequestMethod.POST, value = "newCart", consumes = "application/json")
+    @PostMapping(value = "carts", consumes = "application/json")
     public void newCart() {
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProductsInCart")
+    @GetMapping(value = "carts", consumes = "application/json")
     public List<ProductDto> getProductsInCart(@RequestParam Long productId) {
         return new ArrayList<ProductDto>() ;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "addToCart", consumes = "application/json")
+    @PutMapping(value = "carts", consumes = "application/json")
     public void addToCart(@RequestParam Long cartId, @RequestBody ProductDto productDto) {
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteFromCart")
+    @DeleteMapping(value = "carts", consumes = "application/json")
     public void deleteFromCart(@RequestParam Long cartId, @RequestParam Long productId) {
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    @PostMapping(value = "createOrder", consumes = "application/json")
     public void createOrder(@RequestParam ProductDto productDto) {
     }
 
