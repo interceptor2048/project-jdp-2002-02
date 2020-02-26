@@ -2,18 +2,17 @@ package com.kodilla.ecommercee.domain;
 
 
 import lombok.*;
-import org.jetbrains.annotations.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Product {
 
     @Column(name = "id")
@@ -25,9 +24,9 @@ public class Product {
     @NotNull
     private String name;
 
-    @Column(name = "price")
     @NotNull
-    private BigDecimal price;
+    @Column(name = "price")
+    private double price;
 
     @Column(name = "description")
     private String description;
