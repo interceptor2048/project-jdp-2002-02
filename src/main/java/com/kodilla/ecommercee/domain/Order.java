@@ -18,7 +18,10 @@ public class Order {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
+    @Column(name="status")
+    private String status;
+
     @ManyToOne
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="userId")
     private User user;
 }

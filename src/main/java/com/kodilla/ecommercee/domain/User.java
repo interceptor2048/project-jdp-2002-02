@@ -22,11 +22,11 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="first_name")
-    private String first_name;
+    @Column(name="firstName")
+    private String firstName;
 
-    @Column(name="last_name")
-    private String last_name;
+    @Column(name="lastName")
+    private String lastName;
 
     @OneToMany(
             targetEntity=Order.class,
