@@ -25,7 +25,7 @@ public class GroupController {
     public void addGroup(@RequestBody GroupDto groupDto) {
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateGroup(@PathVariable Long id, @RequestBody(required = false) GroupDto groupDto) {
     }
 }

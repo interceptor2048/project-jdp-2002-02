@@ -25,7 +25,7 @@ public class CartController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+    public void deleteProduct(@PathVariable Long cartId, @RequestParam Long productId) {
     }
 
     @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
