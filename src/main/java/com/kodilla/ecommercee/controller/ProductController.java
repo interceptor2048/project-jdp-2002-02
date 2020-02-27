@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequestMapping("api/v1/ecommercee/products")
 public class ProductController {
 
-    @GetMapping(path = "/products")
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllProducts() {
         return new ArrayList<ProductDto>();
     }
@@ -20,15 +21,15 @@ public class ProductController {
         return new ProductDto();
     }
 
-    @PostMapping(path = "/products", consumes = "application/json")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createProduct(@RequestBody ProductDto productDto) {
     }
 
-    @PutMapping(path = "/products")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateProduct(@RequestBody ProductDto productDto) {
     }
 
-    @DeleteMapping(path = "/products")
-    public void deleteProduct(@RequestParam Long productId) {
+    @DeleteMapping(path = "/{id}")
+    public void deleteProduct(@PathVariable Long productId) {
     }
 }
