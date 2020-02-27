@@ -11,7 +11,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping("api/v1/user")
+@RequestMapping("api/v1/ecommercee/users")
 public class UserController {
 
     @GetMapping("/users")
