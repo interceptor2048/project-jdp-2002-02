@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface OrderDao extends CrudRepository<Order, Long> {
     List<Order> findByStatus(String status);
-    List<Order> findByUserFirstName(String firstName);
 }
