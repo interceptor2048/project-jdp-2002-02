@@ -16,8 +16,8 @@ public class ProductController {
         return new ArrayList<ProductDto>();
     }
 
-    @GetMapping(path = "/products")
-    public ProductDto getProduct(@RequestParam Long productId) {
+    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDto getProduct(@PathVariable("id") Long id) {
         return new ProductDto();
     }
 
@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProduct(@RequestBody ProductDto productDto) {
+    public void updateProduct(@PathVariable Long id, @RequestBody(required = false) ProductDto productDto) {
     }
 
     @DeleteMapping(path = "/{id}")
