@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @Builder
@@ -26,8 +25,5 @@ public class Cart {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     private User user;
-
-    @OneToMany(mappedBy = "cartId", fetch = FetchType.EAGER)
-    private List<Product> products;
 
 }
