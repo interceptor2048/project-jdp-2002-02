@@ -6,11 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "groups")
 public class Group {
@@ -22,10 +19,5 @@ public class Group {
     private String description;
 
     @OneToMany(mappedBy = "groupId")
-    private List<Product> products = new ArrayList<>();
-
-    public Group(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+    final private List<Product> products = new ArrayList<>();
 }

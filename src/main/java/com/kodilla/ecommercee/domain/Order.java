@@ -4,11 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
+@Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
