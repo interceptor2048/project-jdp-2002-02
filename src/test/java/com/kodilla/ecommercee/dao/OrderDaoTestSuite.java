@@ -51,8 +51,8 @@ public class OrderDaoTestSuite {
 
         List<Order> orderList = new ArrayList<>();
         orderDao.findAll().forEach(orderList::add);
-        List<Order> usersByFirsName = orderList.stream().filter(n -> n.getUser().getFirstName().equals(FIRST_NAME)).collect(Collectors.toList());
-        Assert.assertEquals(2, usersByFirsName.size());
+        List<Order> usersByFirstName = orderList.stream().filter(n -> n.getUser().getFirstName().equals(FIRST_NAME)).collect(Collectors.toList());
+        Assert.assertEquals(2, usersByFirstName.size());
         Assert.assertEquals(2, orderDao.findByStatus("inProgress").size());
         orderDao.deleteAll();
     }

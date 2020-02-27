@@ -1,15 +1,12 @@
 package com.kodilla.ecommercee.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -21,12 +18,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @NotNull
     private Long id;
 
-    @Column(name="firstName")
+    @NotNull
+    @Column(name="first_name")
     private String firstName;
 
-    @Column(name="lastName")
+    @NotNull
+    @Column(name="last_name")
     private String lastName;
 
     @OneToMany(
@@ -37,17 +37,5 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
-    }
 }
