@@ -21,7 +21,7 @@ public class CartController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addToCart(@RequestParam Long cartId, @RequestBody ProductDto productDto) {
+    public void addToCart(@PathVariable Long cartId, @RequestBody ProductDto productDto) {
     }
 
     @DeleteMapping(path = "/{id}")
