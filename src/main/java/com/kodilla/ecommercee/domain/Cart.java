@@ -1,17 +1,17 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -26,11 +26,4 @@ public class Cart {
     @JoinColumn(name = "user_name")
     private User user;
 
-    @OneToMany(mappedBy = "cartId", fetch = FetchType.EAGER)
-    private List<Product> products;
-
-    public Cart(User user) {
-        this.user = user;
-        this.products = new ArrayList<>();
-    }
 }
