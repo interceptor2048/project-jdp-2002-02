@@ -28,6 +28,7 @@ public class User {
     private String first_name;
 
     @Column(name="last_name")
+    @NotNull
     private String last_name;
 
     @OneToMany(
