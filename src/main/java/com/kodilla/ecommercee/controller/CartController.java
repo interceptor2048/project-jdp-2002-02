@@ -21,11 +21,11 @@ public class CartController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addToCart(@PathVariable Long cartId, @RequestBody ProductDto productDto) {
+    public void updateCart(@PathVariable Long cartId, @RequestBody ProductDto productDto) {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long cartId, @RequestParam Long productId) {
+    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
     }
 
     @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
