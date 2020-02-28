@@ -10,7 +10,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping("api/v1/ecommercee/orders")
+@RequestMapping("api/v1/ecommercee")
 public class OrderController {
 
     @GetMapping("/orders")
