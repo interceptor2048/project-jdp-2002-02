@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-//
+
 @RestController
 @RequestMapping("api/v1/ecommercee/carts")
 public class CartController {
@@ -22,6 +22,10 @@ public class CartController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCart(@PathVariable Long cartId, @RequestBody ProductDto productDto) {
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
     }
 
     @DeleteMapping(path = "/{id}")
