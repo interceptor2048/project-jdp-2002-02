@@ -17,11 +17,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-
-    @Column(name="status")
-    private String status;
+//
+//    @Column(name="status")
+//    private String status;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="USER_ID")
     private User user;
 }
