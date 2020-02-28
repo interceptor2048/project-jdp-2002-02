@@ -31,4 +31,13 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     annotationProcessor 'org.projectlombok:lombok'
     compile('org.projectlombok:lombok')
+<<<<<<< HEAD
+=======
+
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    compile 'mysql:mysql-connector-java'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+>>>>>>> 2e222323d1534d42ce7bab3b5436d0f74aa1911d
 }
