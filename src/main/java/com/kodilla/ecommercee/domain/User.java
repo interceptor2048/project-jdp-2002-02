@@ -25,10 +25,10 @@ public class User {
     private String lastName;
 
     @OneToMany(
-            targetEntity=Order.class,
-            mappedBy="user",
-            cascade=CascadeType.ALL,
-            fetch=FetchType.LAZY
+        targetEntity=Order.class,
+        mappedBy="user",
+        cascade=CascadeType.ALL,
+        fetch=FetchType.LAZY
     )
-    private final List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 }
