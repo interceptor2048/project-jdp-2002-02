@@ -28,10 +28,6 @@ public class CartController {
     public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
-    }
-
     @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void createOrder(@PathVariable Long cartId) {
     }
