@@ -34,5 +34,4 @@ public class Product {
     @JoinColumn(name = "group_id")
     private Group groupId;
 
-    }
 }
