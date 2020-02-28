@@ -37,15 +37,12 @@ public class OrderDaoTestSuite {
 
 
         Order order1 = new Order();
-                order1.setStatus("inProgress");
                 order1.setUser(user1);
         orderDao.save(order1);
         Order order2 = new Order();
-                order2.setStatus("Done");
                 order2.setUser(user2);
         orderDao.save(order2);
         Order order3 = new Order();
-                order3.setStatus("inProgress");
                 order3.setUser(user1);
         orderDao.save(order3);
 
@@ -53,7 +50,6 @@ public class OrderDaoTestSuite {
         orderDao.findAll().forEach(orderList::add);
         List<Order> usersByFirstName = orderList.stream().filter(n -> n.getUser().getFirstName().equals(FIRST_NAME)).collect(Collectors.toList());
         Assert.assertEquals(2, usersByFirstName.size());
-        Assert.assertEquals(2, orderDao.findByStatus("inProgress").size());
         orderDao.deleteAll();
     }
 }

@@ -22,7 +22,6 @@ public class UserDaoTestSuite {
     @Test
     public void testUserDaoSave() {
         Order order = new Order();
-             order.setStatus("inProgress");
         User user = new User();
              user.setFirstName(FIRST_NAME);
              user.setLastName(LAST_NAME);
@@ -31,7 +30,6 @@ public class UserDaoTestSuite {
         userDao.save(user);
         List<User> listOfUsersByFirstName = userDao.findByFirstName(FIRST_NAME);
         Assert.assertEquals(1, listOfUsersByFirstName.size());
-        Assert.assertEquals("inProgress", user.getOrders().get(0).getStatus());
         userDao.deleteById(user.getId());
     }
 }
