@@ -26,6 +26,11 @@ public class Cart {
     @JoinColumn(name = "user_name")
     private User user;
     
-    @JoinColumn(name = "products")
+    @ManyToMany
+    @JoinTable(
+            name = ("products"),
+            joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
+    )
     private List<Product> products;
 }
