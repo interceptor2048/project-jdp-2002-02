@@ -1,41 +1,40 @@
 package com.kodilla.ecommercee.mapper;
 
+import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper {
-
-
-}
-
-/*
-@Autowired
-    TitleCopyRepository titleCopyRepository;
-
     @Autowired
-    UserRepository userRepository;
+    ProductRepository productRepository;
 
-    public Loan mapToLoan(final LoanDto loanDto) {
-        return new Loan(
-                loanDto.getLoanId(),
-                titleCopyRepository.findByCopyId(loanDto.getCopyId()),
-                userRepository.findByUserId(loanDto.getUserId()),
-                loanDto.getLoanedDate(),
-                loanDto.getReturnedDate());
+    public Product mapToProduct(final ProductDto productDto) {
+        return new Product(
+                productDto.getId(),
+                productDto.getName(),
+                productDto.getPrice(),
+                productDto.getDescription(),
+                productDto.getGroupId());
     }
 
-    public LoanDto mapToLoanDto(final Loan loan) {
-        return new LoanDto(
-                loan.getLoanId(),
-                loan.getTitleCopy().getCopyId(),
-                loan.getLibraryUser().getUserId(),
-                loan.getLoanedDate(),
-                loan.getReturnedDate());
+    public ProductDto mapToProductDto(final Product product) {
+        return new ProductDto(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getDescription(),
+                product.getGroupId());
     }
 
-    public List<LoanDto> mapToLoanDtoList(final List<Loan> loanList) {
-        return loanList.stream()
-                .map(l -> new LoanDto(l.getLoanId(), l.getTitleCopy().getCopyId(), l.getLibraryUser().getUserId(), l.getLoanedDate(), l.getReturnedDate()))
+    public List<ProductDto> mapToProductDtoList(final List<Product> products) {
+        return products.stream()
+                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId()))
                 .collect(Collectors.toList());
     }
- */
+}
