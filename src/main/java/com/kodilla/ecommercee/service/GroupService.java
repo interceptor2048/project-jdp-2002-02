@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.dao.GroupDao;
 import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class GroupService {
     @Autowired
-    GroupRepository groupRepository;
+    GroupDao groupRepository;
 
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
@@ -26,6 +26,6 @@ public class GroupService {
     }
 
     public Group getGroupById(Long id) {
-        return groupRepository.findGroupById(id);
+        return groupRepository.findById(id).orElse(null);
     }
 }
