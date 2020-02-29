@@ -37,7 +37,7 @@ public class ProductMapper {
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId().getId()))
+                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId().getId(), p.getCarts()))
                 .collect(Collectors.toList());
     }
 }
