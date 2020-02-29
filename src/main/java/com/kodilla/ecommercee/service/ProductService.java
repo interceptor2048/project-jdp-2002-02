@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.dao.ProductDao;
 import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class ProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private ProductDao productRepository;
 
     public List<Product> getProducts() {
         return productRepository.findAll();

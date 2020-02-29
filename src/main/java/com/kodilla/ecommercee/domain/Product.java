@@ -6,8 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,8 +35,4 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group groupId;
-
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private List<Cart> carts = new ArrayList<>();
-
 }
