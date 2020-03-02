@@ -1,27 +1,33 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name="orders")
-public class Order {
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "orders")
+public class Order {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="status")
-    private String status;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "total_cost")
+    private double totalCost;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
 }
