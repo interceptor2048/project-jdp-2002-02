@@ -1,1 +1,3 @@
-rootProject.name = 'ecommercee'
+rootProject.name = 'calls'
+include 'kodilla-git'
+
