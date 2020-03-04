@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("api/v1/ecommercee/products")
 public class ProductController {
 
-    private final Logger log = LoggerFactory.getLogger(GroupController.class);
+    private final Logger log = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductService productService;

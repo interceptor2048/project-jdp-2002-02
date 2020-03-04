@@ -1,5 +1,4 @@
 package com.kodilla.ecommercee.domain.dto;
-import com.kodilla.ecommercee.domain.Group;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
