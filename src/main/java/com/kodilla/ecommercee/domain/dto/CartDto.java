@@ -1,4 +1,4 @@
 package com.kodilla.ecommercee.domain.dto;
 
-public class ProductDto {
+public class CartDto {
 }
