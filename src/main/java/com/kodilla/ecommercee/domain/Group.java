@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +24,4 @@ public class Group {
 
     @OneToMany(mappedBy = "groupId")
     private List<Product> products = new ArrayList<>();
-
 }
