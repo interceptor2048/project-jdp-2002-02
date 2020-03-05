@@ -32,4 +32,20 @@ public class User {
         fetch=FetchType.LAZY
     )
     private List<Order> orders = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 }
