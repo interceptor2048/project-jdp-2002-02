@@ -24,7 +24,8 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getPrice(),
                 productDto.getDescription(),
-                groupRepository.findGroupById(productDto.getGroupId()));
+                groupRepository.findGroupById(productDto.getGroupId()),
+                productDto.getCartId());
     }
 
     public ProductDto mapToProductDto(final Product product) {
@@ -33,12 +34,13 @@ public class ProductMapper {
                 product.getName(),
                 product.getPrice(),
                 product.getDescription(),
-                product.getGroupId().getId());
+                product.getGroupId().getId(),
+                product.getCarts());
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId().getId()))
+                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId().getId(), p.getCarts()))
                 .collect(Collectors.toList());
     }
 }

@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,15 +10,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "groups")
+@Table(name = "product_groups")
 public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "groupId")
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "groupId",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
 }
