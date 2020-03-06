@@ -1,8 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,10 +24,26 @@ public class User {
     private String lastName;
 
     @OneToMany(
-        targetEntity= Order.class,
-        mappedBy="user",
-        cascade=CascadeType.ALL,
-        fetch=FetchType.LAZY
+            targetEntity= Order.class,
+            mappedBy="user",
+            cascade=CascadeType.ALL,
+            fetch=FetchType.LAZY
     )
     private List<Order> orders = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 }

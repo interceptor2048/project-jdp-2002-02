@@ -18,15 +18,20 @@ public class GroupDaoTestSuit {
     @Test
     public void testGroupDaoSave() {
         Group group = new Group();
-                group.setName("group1");
-                group.setDescription("description1");
+        group.setName("group1");
+        group.setDescription("description1");
         groupDao.save(group);
         Group group2 = new Group();
-                group2.setName("group2");
-                group2.setDescription("description2");
+        group2.setName("group2");
+        group2.setDescription("description2");
         groupDao.save(group2);
+
+        long groupId = group.getId();
+        long group2Id = group.getId();
         Assert.assertEquals(1, groupDao.findByName("group1").size());
         Assert.assertEquals(2, groupDao.findAll().size());
+        //groupDao.deleteById(groupId);
+        //groupDao.deleteById(group2Id);
         groupDao.deleteAll();
     }
 }
