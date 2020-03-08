@@ -25,7 +25,6 @@ public class OrderController {
 
     @DeleteMapping("/orders/{id}")
     public void deleteOrderById(@PathVariable("id") Long id) {
-
     }
 
     @PutMapping("/orders/{id}")

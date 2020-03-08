@@ -25,7 +25,6 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public void deleteUserById(@PathVariable("id") Long id) {
-
     }
 
     @PutMapping("/users/{id}")

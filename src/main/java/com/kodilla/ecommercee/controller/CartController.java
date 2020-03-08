@@ -9,26 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/ecommercee/carts")
+@RequestMapping("api/v1/ecommercee")
 public class CartController {
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(method = RequestMethod.GET, value = "carts")
     public void newCart(@RequestBody CartDto cartDto) {
     }
 
-    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductDto> getProducts(@PathVariable Long cartId) {
+    @RequestMapping(method = RequestMethod.GET, value = "cartProducts")
+    public List<ProductDto> getProducts(Long cartId) {
         return new ArrayList<ProductDto>();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateCart(@PathVariable Long cartId, @RequestBody ProductDto productDto) {
+    @RequestMapping(method = RequestMethod.PUT, value = "cart")
+    public void updateCart(Long cartId, ProductDto productDto) {
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromTheCart")
+    public void deleteProduct(Long cartId, Long productId) {
     }
 
-    @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createOrder(@PathVariable Long cartId) {
+    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    public void createOrder(Long cartId) {
     }
 }

@@ -21,25 +21,21 @@ public class GroupController {
     @Autowired
     GroupMapper mapper;
 
-    //@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(method = RequestMethod.GET, value = "groups")
     public List<GroupDto> getAllGroups() {
         return mapper.mapToGroupDtoList(service.getAllGroups());
     }
 
-    //@GetMapping(path = "/{id}", value = "getGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(method = RequestMethod.GET, value = "group")
     public GroupDto getGroup(Long groupId) throws NotFoundException {
         return mapper.mapToGroupDto(service.getGroup(groupId).orElseThrow(NotFoundException::new));
     }
 
-    //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(method = RequestMethod.POST, value = "addGroup", consumes = APPLICATION_JSON_VALUE)
     public void addGroup(@RequestBody GroupDto groupDto) {
         service.saveGroup(mapper.mapToGroup(groupDto));
     }
 
-    //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(method = RequestMethod.PUT, value = "updateGroup", consumes = APPLICATION_JSON_VALUE)
     public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
         return mapper.mapToGroupDto(service.saveGroup(mapper.mapToGroup(groupDto)));
