@@ -1,9 +1,12 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "description")
+    @Size(max = 1000)
     private String description;
 
     @ManyToOne
@@ -37,6 +41,7 @@ public class Product {
     private Group groupId;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    @JsonIgnore
     private List<Cart> carts = new ArrayList<>();
 
 }

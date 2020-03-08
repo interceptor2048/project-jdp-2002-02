@@ -26,7 +26,7 @@ public class ProductDaoTestSuite {
     public void testProductDaoSave() {
         Group group = new Group();
         group.setName("group1");
-        group.setDescription("description1");
+        //group.setDescription("description1");
         groupDao.save(group);
         Long groupId = group.getId();
         Product product = new Product();

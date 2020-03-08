@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,10 +20,15 @@ public class Group {
 
     @Column(name = "name")
     private String name;
-
+    
+/*
+    @JsonIgnore
     @Column(name = "description")
     private String description;
 
+ */
+
+    @JsonIgnore
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "groupId",

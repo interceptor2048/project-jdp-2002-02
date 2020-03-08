@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/ecommercee/products")
+@RequestMapping("api/v1/ecommercee")
 public class ProductController {
-
-    private final Logger log = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductService productService;
@@ -25,31 +23,28 @@ public class ProductController {
     @Autowired
     ProductMapper productMapper;
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, value = "products")
     public List<ProductDto> getAllProducts() {
         return productMapper.mapToProductDtoList(productService.getProducts());
     }
 
-    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ProductDto getProduct(@PathVariable("id") Long id) throws NotFoundException {
+    @RequestMapping(method = RequestMethod.GET, value = "product")
+    public ProductDto getProduct(Long id) throws NotFoundException {
         return productMapper.mapToProductDto(productService.getProduct(id).orElseThrow(NotFoundException::new));
-
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "createProduct")
     public void createProduct(@RequestBody ProductDto productDto) {
         productService.saveProduct(productMapper.mapToProduct(productDto));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         return productMapper.mapToProductDto(productService.saveProduct(productMapper.mapToProduct(productDto)));
-
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long productId) {
-
-        productService.deleteProduct(productId);
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
+    public void deleteProduct(Long id) {
+        productService.deleteProduct(id);
     }
 }
