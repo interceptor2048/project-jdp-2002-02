@@ -16,7 +16,7 @@ public class CartController {
     }
 
     @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductDto> getProducts(@PathVariable Long cartId) {
+    public List<ProductDto> getProducts(@PathVariable("id") Long cartId) {
         return new ArrayList<ProductDto>();
     }
 
@@ -25,10 +25,10 @@ public class CartController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable Long cartId, @PathVariable Long productId) {
+    public void deleteProduct(@PathVariable("id") Long cartId, @PathVariable Long productId) {
     }
 
     @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createOrder(@PathVariable Long cartId) {
+    public void createOrder(@PathVariable("id") Long cartId) {
     }
 }
