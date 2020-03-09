@@ -29,11 +29,11 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "product")
-    public ProductDto getProduct(Long id) throws NotFoundException {
+    public ProductDto getProduct(@RequestParam Long id) throws NotFoundException {
         return productMapper.mapToProductDto(productService.getProduct(id).orElseThrow(NotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createProduct")
+    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = "application/json")
     public void createProduct(@RequestBody ProductDto productDto) {
         productService.saveProduct(productMapper.mapToProduct(productDto));
     }
@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(Long id) {
+    public void deleteProduct(@RequestParam Long id) {
         productService.deleteProduct(id);
     }
 }

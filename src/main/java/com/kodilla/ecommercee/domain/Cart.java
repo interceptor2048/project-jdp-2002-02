@@ -23,12 +23,13 @@ public class Cart {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     private User user;
-    
-    @ManyToMany
+
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = ("join_carts_products"),
             joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> products = new ArrayList<>();
+
+
 }

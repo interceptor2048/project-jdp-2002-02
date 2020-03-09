@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,10 +39,19 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group groupId;
+    private Group group;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
+
+    public Product(@NotNull String name, String description, Group group) {
+        this.name = name;
+        this.description = description;
+        this.group = group;
+    }
+
+    public Product(String name) {
+        this.name = name;
+    }
 
 }

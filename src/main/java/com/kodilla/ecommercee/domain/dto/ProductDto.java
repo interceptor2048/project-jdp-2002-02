@@ -19,7 +19,4 @@ public class ProductDto {
     private BigDecimal price;
     private String description;
     private Long groupId;
-    @JsonIgnore
-    private List<Cart> cartId;
-
 }
