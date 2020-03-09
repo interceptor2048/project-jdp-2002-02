@@ -1,35 +1,53 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-import org.springframework.http.MediaType;
+import com.kodilla.ecommercee.exception.NotFoundException;
+import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.CartService;
+import com.kodilla.ecommercee.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/v1/ecommercee")
 public class CartController {
+    @Autowired
+    private CartService cartService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "carts")
-    public void newCart(@RequestBody CartDto cartDto) {
+    @Autowired
+    private CartMapper cartMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Autowired
+    ProductService productService;
+
+    @GetMapping(value = "getCartProducts")
+    public List<ProductDto> getCartProducts(@RequestParam Long cartId) {
+        return productMapper.mapToProductDtoList(cartService.getProducts(cartId));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "cartProducts")
-    public List<ProductDto> getProducts(Long cartId) {
-        return new ArrayList<ProductDto>();
+    @PostMapping(value = "createCart")
+    public void createCart(@RequestBody CartDto cartDto) {
+        cartService.saveCart(cartMapper.mapToCart(cartDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "cart")
-    public void updateCart(Long cartId, ProductDto productDto) {
+    @PutMapping(value = "addProductToCart")
+    public Cart addProductToCart(@RequestParam Long cartId, @RequestParam Long productId) throws NotFoundException {
+       return cartService.addProductToCart(cartId, productId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromTheCart")
-    public void deleteProduct(Long cartId, Long productId) {
+
+    @DeleteMapping(value = "removeProductFromCart")
+    public void deleteProductFromCart(@RequestParam Long cartId, @RequestParam Long productId) throws NotFoundException{
+        cartService.deleteProductFromCart(cartId, productId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
-    public void createOrder(Long cartId) {
-    }
 }
