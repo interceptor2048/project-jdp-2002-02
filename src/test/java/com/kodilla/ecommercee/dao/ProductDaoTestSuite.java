@@ -33,12 +33,11 @@ public class ProductDaoTestSuite {
         product.setName("Milk");
         product.setPrice(new BigDecimal("22.5"));
         product.setDescription("FoodType");
-        product.setGroupId(group);
         productDao.save(product);
         List<Product> productsList = new ArrayList<>();
         productDao.findAll().forEach(productsList::add);
         Assert.assertEquals(1, productDao.findByName("Milk").size());
-        Assert.assertEquals(true, productsList.stream().anyMatch(product1 -> product1.getGroupId().getId().equals(groupId)));
+        Assert.assertEquals(true, productsList.stream().anyMatch(product1 -> product1.getGroup().getId().equals(groupId)));
         productDao.deleteAll();
     }
 }

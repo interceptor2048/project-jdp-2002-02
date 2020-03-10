@@ -20,13 +20,6 @@ public class Group {
 
     @Column(name = "name")
     private String name;
-    
-/*
-    @JsonIgnore
-    @Column(name = "description")
-    private String description;
-
- */
 
     @JsonIgnore
     @OneToMany(
