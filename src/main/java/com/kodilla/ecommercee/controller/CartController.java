@@ -44,10 +44,8 @@ public class CartController {
        return cartService.addProductToCart(cartId, productId);
     }
 
-
     @DeleteMapping(value = "removeProductFromCart")
     public void deleteProductFromCart(@RequestParam Long cartId, @RequestParam Long productId) throws NotFoundException{
         cartService.deleteProductFromCart(cartId, productId);
     }
-
 }
