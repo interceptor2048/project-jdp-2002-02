@@ -28,18 +28,17 @@ public class CartDaoTestSuit {
     @Test
     public void testGroupDaoSave() {
         User user = new User();
-                user.setFirstName("name");
-                user.setLastName("lastName");
+        user.setFirstName("name");
+        user.setLastName("lastName");
         Group group = new Group();
-                group.setName("groipName");
+        group.setName("groipName");
         groupDao.save(group);
         Product product = new Product();
-                product.setName("productName");
-                product.setPrice(new BigDecimal("23"));
-                product.setDescription("productDescription");
-                product.setGroup(group);
+        product.setName("productName");
+        product.setPrice(new BigDecimal("23"));
+        product.setDescription("productDescription");
         Cart cart = new Cart();
-                cart.setUser(user);
+        cart.setUser(user);
         product.getCarts().add(cart);
         productDao.save(product);
         cart.getProducts().add(product);
