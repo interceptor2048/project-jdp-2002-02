@@ -19,11 +19,9 @@ public class GroupDaoTestSuit {
     public void testGroupDaoSave() {
         Group group = new Group();
         group.setName("group1");
-        group.setDescription("description1");
         groupDao.save(group);
         Group group2 = new Group();
         group2.setName("group2");
-        group2.setDescription("description2");
         groupDao.save(group2);
 
         long groupId = group.getId();
