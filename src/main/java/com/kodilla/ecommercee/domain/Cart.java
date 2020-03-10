@@ -23,7 +23,7 @@ public class Cart {
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     private User user;
-    
+
     @ManyToMany
     @JoinTable(
             name = ("join_carts_products"),
