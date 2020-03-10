@@ -20,13 +20,10 @@ public class Group {
 
     @Column(name = "name")
     private String name;
-    
-/*
+
     @JsonIgnore
     @Column(name = "description")
     private String description;
-
- */
 
     @JsonIgnore
     @OneToMany(
@@ -35,4 +32,10 @@ public class Group {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
+
+    public Group(Long id, String name, List<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.products = products;
+    }
 }
