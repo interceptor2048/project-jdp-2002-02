@@ -28,8 +28,6 @@ public class GroupDaoTestSuit {
         long group2Id = group.getId();
         Assert.assertEquals(1, groupDao.findByName("group1").size());
         Assert.assertEquals(2, groupDao.findAll().size());
-        //groupDao.deleteById(groupId);
-        //groupDao.deleteById(group2Id);
         groupDao.deleteAll();
     }
 }
