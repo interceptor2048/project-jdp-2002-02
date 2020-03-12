@@ -4,14 +4,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "products")
 public class Product {
@@ -30,6 +31,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "description")
+    @Size(max = 1000)
     private String description;
 
     @ManyToOne

@@ -32,7 +32,6 @@ public class CartDaoTestSuit {
                 user.setLastName("lastName");
         Group group = new Group();
                 group.setName("groipName");
-                group.setDescription("groupDescription");
         groupDao.save(group);
         Product product = new Product();
                 product.setName("productName");
