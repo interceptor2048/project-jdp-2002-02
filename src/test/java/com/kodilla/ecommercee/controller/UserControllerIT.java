@@ -66,7 +66,7 @@ public class UserControllerIT {
     public static User createEntity() {
         User user = User.builder()
                 .userKey(DEFAULT_USER_KEY)
-                .status(1)
+                .status(DEFAULT_STATUS)
                 .username(DEFAULT_USER_NAME)
                 .build();
         return user;
