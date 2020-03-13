@@ -33,8 +33,8 @@ public class UserControllerIT {
     private static final int DEFAULT_STATUS = 1;
     private static final int UPDATED_STATUS = 2;
 
-    private static final Long DEFAULT_USER_KEY = 1L;
-    private static final Long UPDATED_USER_KEY = 2L;
+    private static final String DEFAULT_USER_KEY = "123";
+    private static final String UPDATED_USER_KEY = "1234";
 
     @Autowired
     private UserMapper userMapper;

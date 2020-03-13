@@ -1,57 +1,69 @@
 package com.kodilla.ecommercee.dao;
 
-import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-
+import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class CartDaoTestSuit {
-
-    @Autowired
-    ProductDao productDao;
-    @Autowired
-    CartDao cartDao;
     @Autowired
     GroupDao groupDao;
 
+    @Autowired
+    ProductDao productDao;
 
-    @Before
-    public void clean() {
-        productDao.deleteAll();
-        groupDao.deleteAll();
-        cartDao.deleteAll();
-    }
+    @Autowired
+    CartDao cartDao;
 
+    @Autowired
+    OrderItemDao orderItemDao;
+
+    @Autowired
+    UserDao userDao;
 
     @Test
     public void testCartDaoSave() {
+        User user = new User();
+        user.setUsername("Piotr");
+        user.setStatus(1);
+        Order order = new Order();
+        order.setStatus(1);
+        order.setOrderDate(LocalDate.of(2017, 1, 13));
+        order.setRequiredDate(LocalDate.of(2017, 1, 15));
+        order.setShippedDate(LocalDate.of(2017,1,13));
+        order.setComments("delivery befor 12");
+        user.getOrders().add(order);
+        Cart cart = new Cart();
+        cart.setUser(user);
+        OrderItem orderItem = new OrderItem();
+        orderItem.setQuantity(2);
+
+
         Group group = new Group();
-        group.setName("groipName");
+        group.setName("Clothes");
         groupDao.save(group);
         Product product = new Product();
-        product.setName("productName");
-        product.setPrice(new BigDecimal("23"));
-        product.setDescription("productDescription");
+        product.setName("Jacket");
+        product.setDescription("Jacket_Description");
+        product.setPrice(new BigDecimal("100"));
         product.setGroupId(group);
-        Cart cart = new Cart();
-        productDao.save(product);
-        cart.getProducts().add(product);
-        cartDao.save(cart);
 
-        Assert.assertTrue(cart.getProducts().stream().anyMatch(p -> p.getName().equals("productName")));
-        Assert.assertNotEquals(0L, cart.getId().longValue());
+        cartDao.save(cart);
+        orderItem.setProduct(product);
+        orderItem.setCart(cart);
+        orderItemDao.save(orderItem);
+        cart.getOrderItems().add(orderItem);
+
+        Assert.assertNotEquals(0, cartDao.findById(cart.getId()));
+
+        cartDao.deleteAll();
     }
 }
