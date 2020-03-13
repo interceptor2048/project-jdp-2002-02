@@ -1,42 +1,37 @@
 package com.kodilla.ecommercee.dao;
 
 import com.kodilla.ecommercee.domain.Group;
+import com.kodilla.ecommercee.domain.Product;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class GroupDaoTestSuit {
 
     @Autowired
     GroupDao groupDao;
-
     @Autowired
     ProductDao productDao;
 
-    @Before
-    public void cleanUp() {
-        productDao.deleteAll();
-        groupDao.deleteAll();
-    }
-
     @Test
-    public void testGroupDaoSave() {
+    public void testGroup2DaoSave() {
         Group group = new Group();
-                group.setName("group1");
+                group.setName("Food");
+        Product product = new Product();
+                    product.setName("Jacket");
+                    product.setDescription("Jacket_Description");
+                    product.setPrice(new BigDecimal("100"));
+                    product.setGroupId(group);
+        group.getProducts().add(product);
         groupDao.save(group);
-        Group group2 = new Group();
-                group2.setName("group2");
-        groupDao.save(group2);
-        Assert.assertEquals(1, groupDao.findByName("group1").size());
-        Assert.assertEquals(2, groupDao.findAll().size());
-        groupDao.deleteAll();
+        Assert.assertEquals(1, groupDao.findByName("Food").size());
+        groupDao.deleteById(group.getId());
     }
 }

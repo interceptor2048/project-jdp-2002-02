@@ -3,15 +3,16 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Builder
+@Entity
 @Table(name="users")
 public class User {
 
@@ -23,7 +24,20 @@ public class User {
     private String username;
 
     @Column(name="status")
-    private  int status;
+    private int status;
 
-    private Long userKey;
+    @Column(name="userKey")
+    private String userKey;
+
+    public User() {
+        this.userKey = RandomStringUtils.random(5, false, true);
+    }
+
+    @OneToMany(
+            targetEntity= Order.class,
+            mappedBy="user",
+            cascade=CascadeType.ALL,
+            fetch=FetchType.LAZY
+    )
+    private List<Order> orders = new ArrayList<>();
 }
