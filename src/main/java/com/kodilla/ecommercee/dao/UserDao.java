@@ -4,4 +4,6 @@ import com.kodilla.ecommercee.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserDao extends JpaRepository<User, Long> {
+    @Override
+    <S extends User> S saveAndFlush(S entity);
 }

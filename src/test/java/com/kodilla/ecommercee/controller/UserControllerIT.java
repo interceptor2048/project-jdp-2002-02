@@ -6,8 +6,10 @@ import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.dao.UserDao;
 import com.kodilla.ecommercee.service.UserService;
 import com.kodilla.ecommercee.mapper.UserMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,7 +56,7 @@ public class UserControllerIT {
     @Autowired
     private UserService userService;
 
-    @BeforeEach
+    @Before
     public void setup() {
         mapper = new ObjectMapper();
         MockitoAnnotations.initMocks(this);
@@ -82,7 +84,7 @@ public class UserControllerIT {
         return user;
     }
 
-    @BeforeEach
+    @Before
     public void initTest() {
         user = createEntity();
     }
