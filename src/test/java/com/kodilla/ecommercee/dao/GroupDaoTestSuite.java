@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductDaoTestSuite {
+public class GroupDaoTestSuite {
 
     @Autowired
     Group2Dao group2Dao;
@@ -21,20 +21,17 @@ public class ProductDaoTestSuite {
     Product2Dao product2Dao;
 
     @Test
-    public void testProduct2DaoSave() {
+    public void testGroup2DaoSave() {
         Group group = new Group();
-                group.setName("Clothes");
-        group2Dao.save(group);
+                group.setName("Food");
         Product product = new Product();
-                product.setName("Jacket");
-                product.setDescription("Jacket_Description");
-                product.setPrice(new BigDecimal("100"));
-                product.setGroupId(group);
-        product2Dao.save(product);
-
-        Assert.assertEquals(1, product2Dao.findByName("Jacket").size());
-        product2Dao.deleteAll();
-        group2Dao.deleteAll();
+                    product.setName("Jacket");
+                    product.setDescription("Jacket_Description");
+                    product.setPrice(new BigDecimal("100"));
+                    product.setGroupId(group);
+        group.getProducts().add(product);
+        group2Dao.save(group);
+        Assert.assertEquals(1, group2Dao.findByName("Food").size());
+        group2Dao.deleteById(group.getId());
     }
-
 }
