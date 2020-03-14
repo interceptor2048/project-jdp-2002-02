@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.dao;
 
-import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.Order;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +9,6 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface Product2Dao extends CrudRepository<Product, Long> {
-    List<Product> findByName(String name);
+public interface OrderDao extends CrudRepository<Order, Long> {
+    List<Order> findByStatus(int status);
 }

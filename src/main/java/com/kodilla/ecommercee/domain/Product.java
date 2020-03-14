@@ -17,14 +17,13 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="name")
+    @Column(name="username")
     private String name;
 
     @Column(name="price")
     private BigDecimal price;
 
     @Column(name="description")
-    @Size(max = 1000)
     private String description;
 
     @ManyToOne

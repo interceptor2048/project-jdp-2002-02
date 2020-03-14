@@ -15,25 +15,25 @@ import java.time.LocalDate;
 @SpringBootTest
 public class CartDaoTestSuite {
     @Autowired
-    Group2Dao group2Dao;
+    GroupDao groupDao;
 
     @Autowired
-    Product2Dao product2Dao;
+    ProductDao productDao;
 
     @Autowired
-    Cart2Dao cart2Dao;
+    CartDao cartDao;
 
     @Autowired
     OrderItemDao orderItemDao;
 
     @Autowired
-    User2Dao user2Dao;
+    UserDao userDao;
 
     @Test
     public void testCartDaoSave() {
         User user = new User();
-        user.setName("Piotr");
-        user.setStatus("1");
+        user.setUsername("Piotr");
+        user.setStatus(1);
         Order order = new Order();
         order.setStatus(1);
         order.setOrderDate(LocalDate.of(2017, 1, 13));
@@ -49,21 +49,21 @@ public class CartDaoTestSuite {
 
         Group group = new Group();
         group.setName("Clothes");
-        group2Dao.save(group);
+        groupDao.save(group);
         Product product = new Product();
         product.setName("Jacket");
         product.setDescription("Jacket_Description");
         product.setPrice(new BigDecimal("100"));
         product.setGroupId(group);
 
-        cart2Dao.save(cart);
+        cartDao.save(cart);
         orderItem.setProduct(product);
         orderItem.setCart(cart);
         orderItemDao.save(orderItem);
         cart.getOrderItems().add(orderItem);
 
-        Assert.assertNotEquals(0, cart2Dao.findById(cart.getId()));
+        Assert.assertNotEquals(0, cartDao.findById(cart.getId()));
 
-        cart2Dao.deleteAll();
+        cartDao.deleteAll();
     }
 }

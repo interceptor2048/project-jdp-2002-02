@@ -16,25 +16,25 @@ import java.math.BigDecimal;
 public class ProductDaoTestSuite {
 
     @Autowired
-    Group2Dao group2Dao;
+    GroupDao groupDao;
     @Autowired
-    Product2Dao product2Dao;
+    ProductDao productDao;
 
     @Test
-    public void testProduct2DaoSave() {
+    public void testProductDaoSave() {
         Group group = new Group();
                 group.setName("Clothes");
-        group2Dao.save(group);
+        groupDao.save(group);
         Product product = new Product();
                 product.setName("Jacket");
                 product.setDescription("Jacket_Description");
                 product.setPrice(new BigDecimal("100"));
                 product.setGroupId(group);
-        product2Dao.save(product);
+        productDao.save(product);
 
-        Assert.assertEquals(1, product2Dao.findByName("Jacket").size());
-        product2Dao.deleteAll();
-        group2Dao.deleteAll();
+        Assert.assertEquals(1, productDao.findByName("Jacket").size());
+        productDao.deleteAll();
+        groupDao.deleteAll();
     }
 
 }

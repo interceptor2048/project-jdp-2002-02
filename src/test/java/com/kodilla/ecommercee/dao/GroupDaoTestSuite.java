@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 public class GroupDaoTestSuite {
 
     @Autowired
-    Group2Dao group2Dao;
+    GroupDao groupDao;
     @Autowired
-    Product2Dao product2Dao;
+    ProductDao productDao;
 
     @Test
     public void testGroup2DaoSave() {
@@ -30,8 +30,8 @@ public class GroupDaoTestSuite {
                     product.setPrice(new BigDecimal("100"));
                     product.setGroupId(group);
         group.getProducts().add(product);
-        group2Dao.save(group);
-        Assert.assertEquals(1, group2Dao.findByName("Food").size());
-        group2Dao.deleteById(group.getId());
+        groupDao.save(group);
+        Assert.assertEquals(1, groupDao.findByName("Food").size());
+        groupDao.deleteById(group.getId());
     }
 }

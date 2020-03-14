@@ -8,5 +8,5 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface Cart2Dao extends CrudRepository<Cart, Long> {
+public interface CartDao extends CrudRepository<Cart, Long> {
 }

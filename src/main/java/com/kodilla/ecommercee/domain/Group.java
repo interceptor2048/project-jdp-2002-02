@@ -18,7 +18,7 @@ public class Group {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="name")
+    @Column(name="username")
     private String name;
 
     @OneToMany(

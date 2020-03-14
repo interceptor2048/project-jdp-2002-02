@@ -20,17 +20,17 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="username")
+    private String username;
 
     @Column(name="status")
-    private String status;
+    private int status;
 
     @Column(name="userKey")
-    private int userKey;
+    private String userKey;
 
     public User() {
-        this.userKey = Integer.parseInt(RandomStringUtils.random(5, false, true));
+        this.userKey = RandomStringUtils.random(5, false, true);
     }
 
     @OneToMany(
