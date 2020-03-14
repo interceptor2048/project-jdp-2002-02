@@ -6,24 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder
-@Table(name="users")
-public class User {
+@Table(name = "sessions")
+public class Session implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="username")
-    private String username;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name="status")
-    private  int status;
-
-    private Long userKey;
+    @Column(name = "logged_in")
+    private boolean loggedIn;
 }

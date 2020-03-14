@@ -18,13 +18,9 @@ public class Cart {
     @Id
     @NotNull
     @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_name")
-    private User user;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(
             name = ("join_carts_products"),
             joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),

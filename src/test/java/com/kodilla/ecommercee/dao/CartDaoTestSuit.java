@@ -1,8 +1,10 @@
 package com.kodilla.ecommercee.dao;
 
+import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,37 +13,45 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ProductDaoTestSuite {
+public class CartDaoTestSuit {
+
     @Autowired
     ProductDao productDao;
-
+    @Autowired
+    CartDao cartDao;
     @Autowired
     GroupDao groupDao;
 
-    @Test
-    public void testProductDaoSave() {
-        Group group = new Group();
-        group.setName("group1");
-        groupDao.save(group);
-        Long groupId = group.getId();
-        Product product = new Product();
-        product.setName("Milk");
-        product.setPrice(new BigDecimal("22.5"));
-        product.setDescription("FoodType");
-        product.setGroupId(group);
-        productDao.save(product);
-        List<Product> productsList = new ArrayList<>();
-        productDao.findAll().forEach(productsList::add);
-        Assert.assertEquals(1, productDao.findByName("Milk").size());
-        Assert.assertEquals(true, productsList.stream().anyMatch(product1 -> product1.getGroupId().getId().equals(groupId)));
+
+    @Before
+    public void clean() {
         productDao.deleteAll();
+        groupDao.deleteAll();
+        cartDao.deleteAll();
+    }
+
+
+    @Test
+    public void testCartDaoSave() {
+        Group group = new Group();
+        group.setName("groipName");
+        groupDao.save(group);
+        Product product = new Product();
+        product.setName("productName");
+        product.setPrice(new BigDecimal("23"));
+        product.setDescription("productDescription");
+        product.setGroupId(group);
+        Cart cart = new Cart();
+        productDao.save(product);
+        cart.getProducts().add(product);
+        cartDao.save(cart);
+
+        Assert.assertTrue(cart.getProducts().stream().anyMatch(p -> p.getName().equals("productName")));
+        Assert.assertNotEquals(0L, cart.getId().longValue());
     }
 }
-
-
