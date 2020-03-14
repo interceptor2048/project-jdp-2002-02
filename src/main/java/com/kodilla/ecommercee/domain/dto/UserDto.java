@@ -19,5 +19,5 @@ public class UserDto implements Serializable {
 
     private int status;
 
-    private Long userKey;
+    private String userKey;
 }
