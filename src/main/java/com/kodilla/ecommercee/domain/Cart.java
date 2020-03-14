@@ -21,7 +21,6 @@ public class Cart {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="userId")
-    @NotFound(action= NotFoundAction.IGNORE)
     private User user;
 
     @OneToMany(
