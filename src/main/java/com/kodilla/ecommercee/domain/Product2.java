@@ -29,4 +29,5 @@ public class Product2 {
     @ManyToOne
     @JoinColumn(name="groupId")
     private Group2 groupId;
+
 }
