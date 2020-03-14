@@ -29,10 +29,4 @@ public class Product2 {
     @ManyToOne
     @JoinColumn(name="groupId")
     private Group2 groupId;
-
-    public Product2(String name, String description, BigDecimal price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
 }

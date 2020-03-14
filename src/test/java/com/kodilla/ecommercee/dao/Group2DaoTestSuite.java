@@ -22,8 +22,12 @@ public class Group2DaoTestSuite {
 
     @Test
     public void testGroup2DaoSave() {
-        Group2 group = new Group2("Food");
-        Product2 product = new Product2("Jacket", "Jacket_Description", new BigDecimal("100"));
+        Group2 group = new Group2();
+        group.setName("Food");
+        Product2 product = new Product2();
+        product.setName("Jacket");
+        product.setDescription("Jacket_Description");
+        product.setPrice(new BigDecimal("100"));
         product.setGroupId(group);
         group.getProducts().add(product);
         group2Dao.save(group);

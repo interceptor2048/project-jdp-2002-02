@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name="product_groups2")
@@ -28,8 +28,4 @@ public class Group2 {
             fetch = FetchType.LAZY
     )
     List<Product2> products = new ArrayList<>();
-
-    public Group2(String name) {
-        this.name = name;
-    }
 }
