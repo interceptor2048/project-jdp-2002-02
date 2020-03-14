@@ -40,7 +40,7 @@ public class User2DaoTestSuite {
         orderItem.setCart(cart);
         Group2 group = new Group2("Clothes");
         group2Dao.save(group);
-        Product2 product = new Product2("Jacket", "Jacket_Description", new BigDecimal("100"));
+        Product2 product = new Product2("Jacket", "Jacket_Description", new BigDecimal(100));
         product.setGroupId(group);
         orderItem.setProduct(product);
         orderItemDao.save(orderItem);
