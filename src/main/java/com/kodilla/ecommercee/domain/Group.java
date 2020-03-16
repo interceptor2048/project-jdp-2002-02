@@ -15,10 +15,10 @@ import java.util.List;
 public class Group {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="username")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(

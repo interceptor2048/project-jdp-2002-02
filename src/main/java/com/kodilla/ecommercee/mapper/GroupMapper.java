@@ -19,7 +19,7 @@ public class GroupMapper {
     }
 
     public List<GroupDto> mapToGroupDtoList(final List<Group> groupList) {
-        return groupList.stream().map(g -> new GroupDto(g.getId(), g.getName(), g.getProducts()))
+        return groupList.stream().map(g -> new GroupDto(g.getId(), g.getName(),g.getProducts()))
                 .collect(Collectors.toList());
     }
 }
