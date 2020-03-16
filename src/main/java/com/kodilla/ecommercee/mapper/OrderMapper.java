@@ -78,7 +78,7 @@ public class OrderMapper {
             orderBean.setUserId(null);
         }
         else {
-            orderBean.setUserId(order.getCart().getId());
+            orderBean.setUserId(order.getUser().getId());
         }
         orderBean.setTotalCost(calculateCost(order));
         return orderBean;

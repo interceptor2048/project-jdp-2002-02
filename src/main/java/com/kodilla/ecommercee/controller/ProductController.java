@@ -41,7 +41,7 @@ public class ProductController {
         productService.saveProduct(productMapper.mapToProduct(productDto));
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         return productMapper.mapToProductDto(productService.saveProduct(productMapper.mapToProduct(productDto)));
 
