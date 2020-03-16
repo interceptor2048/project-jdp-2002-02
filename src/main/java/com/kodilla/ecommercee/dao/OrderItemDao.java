@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface OrderItemDao extends CrudRepository<OrderItem, Long> {
+
 }
