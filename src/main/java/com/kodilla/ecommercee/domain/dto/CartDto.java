@@ -21,5 +21,5 @@ public class CartDto {
     private Long user;
 
     @JsonIgnore
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();
 }
