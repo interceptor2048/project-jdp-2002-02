@@ -33,4 +33,6 @@ public class Cart {
     )
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToOne(mappedBy = "cart")
+    private Order order;
    }

@@ -31,7 +31,10 @@ public class OrderMapper {
         if(order.getCart().getOrderItems() == null) {
             return BigDecimal.ZERO;
         }
-        return BigDecimal.valueOf(order.getCart().getOrderItems().stream().mapToDouble(s->s.getProduct().getPrice().doubleValue()).sum()).setScale(2);
+
+        return BigDecimal.valueOf(order.getCart().getOrderItems().stream()
+                .mapToDouble(s->s.getProduct().getPrice().doubleValue() * s.getQuantity())
+                .sum()).setScale(2);
     }
 
     private Cart fetchCartById(final Long id) {

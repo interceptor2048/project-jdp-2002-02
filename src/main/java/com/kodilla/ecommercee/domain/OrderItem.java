@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -27,4 +28,10 @@ public class OrderItem {
 
     @Column(name="quantity")
     private int quantity;
+
+    public OrderItem(Cart cart, Product product, int quantity) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
 }

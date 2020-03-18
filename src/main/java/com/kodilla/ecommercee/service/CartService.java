@@ -34,4 +34,10 @@ public class CartService {
     public void deleteCartById(final Long id){
         cartDao.deleteById(id);
     }
+
+    public Cart getCart(Long cartId) {
+        return cartDao.findById(cartId).orElse(new Cart());
+    }
+
+
 }

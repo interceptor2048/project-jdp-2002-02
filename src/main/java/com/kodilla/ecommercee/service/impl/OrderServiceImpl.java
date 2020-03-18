@@ -61,4 +61,9 @@ public class OrderServiceImpl implements OrderService {
         log.debug("Request to delete Order : {}", id);
         orderRepository.deleteById(id);
     }
+
+    public Order saveOrder(Order order) {
+        log.debug("Request to save Order");
+        return orderRepository.save(order);
+    }
 }

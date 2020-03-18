@@ -33,7 +33,6 @@ public class ProductController {
     @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getProduct(@PathVariable("id") Long id) throws NotFoundException {
         return productMapper.mapToProductDto(productService.getProduct(id).orElseThrow(NotFoundException::new));
-
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -44,12 +43,10 @@ public class ProductController {
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         return productMapper.mapToProductDto(productService.saveProduct(productMapper.mapToProduct(productDto)));
-
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteProduct(@PathVariable Long productId) {
-
         productService.deleteProduct(productId);
     }
 }
