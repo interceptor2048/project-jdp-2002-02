@@ -18,8 +18,11 @@ public class CartDto {
 
     private Long id;
 
-    private Long user;
+    private Long userId;
 
     @JsonIgnore
     private List<OrderItem> orderItems = new ArrayList<>();
+
+    private Long orderId;
+
 }
