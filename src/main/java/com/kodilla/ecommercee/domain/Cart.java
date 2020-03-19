@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,11 +24,15 @@ public class Cart {
     @JoinColumn(name="userId")
     private User user;
 
+    @JsonIgnore
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "cart",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<OrderItem> orderItems = new ArrayList<>();
-}
+
+    @OneToOne(mappedBy = "cart")
+    private Order order;
+   }

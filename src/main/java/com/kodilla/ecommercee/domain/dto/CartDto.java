@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kodilla.ecommercee.domain.OrderItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,9 @@ public class CartDto {
 
     private Long userId;
 
-    private List<ProductDto> products = new ArrayList<>();
+    @JsonIgnore
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    private Long orderId;
+
 }

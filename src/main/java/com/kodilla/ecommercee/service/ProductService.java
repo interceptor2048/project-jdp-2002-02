@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.dao.ProductDao;
+import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public Product getProductById(Long productId) {
+        return productRepository.findById(productId).orElse(new Product());
     }
 }

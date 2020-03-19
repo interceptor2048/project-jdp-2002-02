@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface OrderDao extends CrudRepository<Order, Long> {
     List<Order> findByStatus(int status);
+    Order findOrderById(Long id);
 }
