@@ -1,37 +1,38 @@
 package com.kodilla.ecommercee.domain;
 
-import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table(name="carts")
+@Table(name = "carts")
 public class Cart {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="userId")
-    @NotFound(action= NotFoundAction.IGNORE)
     private User user;
 
+    @JsonIgnore
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "cart",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<OrderItem> orderItems = new ArrayList<>();
-}
+
+    @OneToOne(mappedBy = "cart")
+    private Order order;
+   }

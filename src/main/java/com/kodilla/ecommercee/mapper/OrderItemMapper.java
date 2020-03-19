@@ -12,19 +12,20 @@ import java.util.stream.Collectors;
 
 @Component
 public class OrderItemMapper {
-   @Autowired
-   ProductDao productRepository;
+
+    @Autowired
+    ProductDao productRepository;
 
     @Autowired
     CartDao cartRepository;
 
     public OrderItem mapToOrderItem(final OrderItemDto orderItemDto){
-        OrderItem orderItem = new OrderItem();
-        orderItem.setId(orderItemDto.getId());
-        orderItem.setQuantity(orderItemDto.getQuantity());
-        orderItem.setProduct(productRepository.findProductById(orderItemDto.getProductId()));
-        orderItem.setCart(cartRepository.findCartById(orderItemDto.getCartId()));
-        return orderItem;
+        return new OrderItem(
+                orderItemDto.getId(),
+                cartRepository.findCartById(orderItemDto.getCartId()),
+                productRepository.findProductById(orderItemDto.getProductId()),
+                orderItemDto.getQuantity()
+        );
     }
 
     public OrderItemDto mapToOrderItemDto(final OrderItem orderItem){
@@ -38,12 +39,7 @@ public class OrderItemMapper {
 
     public List<OrderItemDto> mapToOrderItemDtoList(final List<OrderItem> orderItemList) {
         return orderItemList.stream()
-                .map(o -> new OrderItemDto(
-                        o.getId(),
-                        o.getQuantity(),
-                        o.getProduct().getId(),
-                        o.getCart().getId()
-                ))
+                .map(o -> new OrderItemDto(o.getId(), o.getQuantity(), o.getProduct().getId(), o.getCart().getId()))
                 .collect(Collectors.toList());
     }
 }

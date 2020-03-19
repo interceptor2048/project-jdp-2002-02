@@ -1,40 +1,75 @@
 package com.kodilla.ecommercee.controller;
 
-import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
-import org.springframework.stereotype.Controller;
+import com.kodilla.ecommercee.domain.dto.OrderDto;
+import com.kodilla.ecommercee.service.OrderService;
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-@Controller
-@RequestMapping("api/v1/ecommercee")
+@RestController
+@RequestMapping("/api/v1/ecommercee")
 public class OrderController {
 
-    @GetMapping("/orders")
-    public List<OrderDto> getOrders() {
-        return new ArrayList<>();
+    private final Logger log = LoggerFactory.getLogger(OrderController.class);
+
+    private static final String ENTITY_NAME = "order";
+
+    private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    @GetMapping("/orders/{id}")
-    public OrderDto getOrderById(@PathVariable("id") Long id) {
-        return new OrderDto();
+    @GetMapping("/orders")
+    public List<OrderDto> getAllOrders() {
+        log.debug("REST request to get all Orders");
+        return orderService.findAll();
+    }
+
+    @GetMapping(value = "/orders/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes =MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> getOrder(@PathVariable Long id) {
+        log.debug("REST request to get Order : {}", id);
+        Optional<OrderDto> orderDTO = orderService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(orderDTO);
     }
 
     @DeleteMapping("/orders/{id}")
-    public void deleteOrderById(@PathVariable("id") Long id) {
-
+    public ResponseEntity<?> deleteOrder(@PathVariable Long id) {
+        log.debug("REST request to delete Order : {}", id);
+        orderService.delete(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert("Ecommerce shop", false, ENTITY_NAME, id.toString())).build();
     }
 
-    @PutMapping("/orders/{id}")
-    public OrderDto updateOrderById(@PathVariable("id") Long id) {
-        return new OrderDto();
+    @PutMapping("/orders")
+    public ResponseEntity<?> updateOrder(@RequestBody OrderDto orderDTO)  {
+        log.debug("REST request to update Order : {}", orderDTO);
+        if (orderDTO.getId() == null) {
+            return ResponseEntity.badRequest().body("Order with given id does not exists");
+        }
+        OrderDto result = orderService.save(orderDTO);
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("Ecommerce shop", false, ENTITY_NAME, orderDTO.getId().toString()))
+                .body(result);
     }
 
-    @PostMapping(path = "/orders", consumes=APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public void createOrder(@RequestBody OrderDto orderDto) {
-
+    @PostMapping("/orders")
+    public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDTO) throws URISyntaxException {
+        log.debug("REST request to save Order : {}", orderDTO);
+        if (orderDTO.getId() != null) {
+            return ResponseEntity.badRequest().body("User with given id already exists");
+        }
+        OrderDto result = orderService.save(orderDTO);
+        return ResponseEntity.created(new URI("/api/v1/ecommercee/orders/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("Ecommerce shop", false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 }

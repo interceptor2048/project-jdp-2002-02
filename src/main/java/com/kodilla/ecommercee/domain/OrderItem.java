@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -18,13 +19,19 @@ public class OrderItem {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="quantity")
-    private int quantity;
+    @ManyToOne
+    @JoinColumn(name="cartId")
+    private Cart cart;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name="cartId")
-    private Cart cart;
+    @Column(name="quantity")
+    private int quantity;
+
+    public OrderItem(Cart cart, Product product, int quantity) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
 }

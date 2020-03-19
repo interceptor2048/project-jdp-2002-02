@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,12 +16,13 @@ import java.util.List;
 public class Group {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="username")
+    @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "groupId",

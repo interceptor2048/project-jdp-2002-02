@@ -21,7 +21,7 @@ public class GroupDaoTestSuit {
     ProductDao productDao;
 
     @Test
-    public void testGroup2DaoSave() {
+    public void testGroupDaoSave() {
         Group group = new Group();
                 group.setName("Food");
         Product product = new Product();
