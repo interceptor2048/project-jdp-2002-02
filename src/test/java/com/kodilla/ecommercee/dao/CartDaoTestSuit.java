@@ -32,33 +32,31 @@ public class CartDaoTestSuit {
     @Test
     public void testCartDaoSave() {
         User user = new User();
+        Order order = new Order();
+        Cart cart = new Cart();
+        Group group = new Group();
+        Product product = new Product();
+        OrderItem orderItem = new OrderItem();
+
         user.setUsername("Piotr");
         user.setStatus(1);
-        Order order = new Order();
         order.setStatus(1);
         order.setOrderDate(LocalDate.of(2017, 1, 13));
         order.setRequiredDate(LocalDate.of(2017, 1, 15));
         order.setShippedDate(LocalDate.of(2017,1,13));
         order.setComments("delivery befor 12");
         user.getOrders().add(order);
-        Cart cart = new Cart();
-        OrderItem orderItem = new OrderItem();
-        orderItem.setQuantity(2);
-
-
-        Group group = new Group();
         group.setName("Clothes");
-        groupDao.save(group);
-        Product product = new Product();
         product.setName("Jacket");
         product.setDescription("Jacket_Description");
         product.setPrice(new BigDecimal("100"));
         product.setGroup(group);
-
-        cartDao.save(cart);
+        orderItem.setQuantity(2);
         orderItem.setProduct(product);
         orderItem.setCart(cart);
-        orderItem.setQuantity(2);
+
+        groupDao.save(group);
+        cartDao.save(cart);
         orderItemDao.save(orderItem);
         cart.getOrderItems().add(orderItem);
 
