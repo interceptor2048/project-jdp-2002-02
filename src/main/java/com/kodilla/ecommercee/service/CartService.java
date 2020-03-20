@@ -1,23 +1,17 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.dao.CartDao;
-import com.kodilla.ecommercee.dao.ProductDao;
 import com.kodilla.ecommercee.domain.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CartService {
     @Autowired
     private CartDao cartDao;
-
-    @Autowired
-    private ProductDao productDao;
 
     public List<Cart> getAllCarts(){
         return cartDao.findAll();

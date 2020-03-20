@@ -23,7 +23,7 @@ public class OrderItemMapper {
         return new OrderItem(
                 orderItemDto.getId(),
                 cartRepository.findCartById(orderItemDto.getCart()),
-                productRepository.findProductById(orderItemDto.getProductId()),
+                productRepository.findById(orderItemDto.getProductId()).orElse(null),
                 orderItemDto.getQuantity()
         );
     }
@@ -32,14 +32,21 @@ public class OrderItemMapper {
         return new OrderItemDto(
                 orderItem.getId(),
                 orderItem.getCart().getId(),
-                orderItem.getProduct().getId(),
+                orderItem.getProduct().getProductId(),
                 orderItem.getQuantity()
         );
     }
 
     public List<OrderItemDto> mapToOrderItemDtoList(final List<OrderItem> orderItemList) {
         return orderItemList.stream()
-                .map(o -> new OrderItemDto(o.getId(), o.getCart().getId(), o.getProduct().getId(), o.getQuantity()))
+                .map(this::mapToOrderItemDto)
                 .collect(Collectors.toList());
     }
+
+    public List<OrderItem> mapToOrderItemList(final List<OrderItemDto> orderItemDtoListList) {
+        return orderItemDtoListList.stream()
+                .map(this::mapToOrderItem)
+                .collect(Collectors.toList());
+    }
+
 }

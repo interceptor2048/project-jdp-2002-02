@@ -16,14 +16,16 @@ import java.util.Optional;
 @Table(name="orderItems")
 public class OrderItem {
     @Id
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="cartId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cart_id", referencedColumnName = "id")
     private Cart cart;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     @Column(name="quantity")

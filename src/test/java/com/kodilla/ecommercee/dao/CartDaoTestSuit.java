@@ -42,7 +42,6 @@ public class CartDaoTestSuit {
         order.setComments("delivery befor 12");
         user.getOrders().add(order);
         Cart cart = new Cart();
-        cart.setUser(user);
         OrderItem orderItem = new OrderItem();
         orderItem.setQuantity(2);
 
@@ -54,11 +53,12 @@ public class CartDaoTestSuit {
         product.setName("Jacket");
         product.setDescription("Jacket_Description");
         product.setPrice(new BigDecimal("100"));
-        product.setGroupId(group);
+        product.setGroup(group);
 
         cartDao.save(cart);
         orderItem.setProduct(product);
         orderItem.setCart(cart);
+        orderItem.setQuantity(2);
         orderItemDao.save(orderItem);
         cart.getOrderItems().add(orderItem);
 

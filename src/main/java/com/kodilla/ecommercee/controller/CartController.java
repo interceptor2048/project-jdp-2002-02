@@ -52,15 +52,15 @@ public class CartController {
         return cartMapper.mapToCartDto(cartService.getCart(cartId));
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CartDto addProductToCart(@PathVariable("id") Long cartId, @RequestBody Long productId, @RequestParam int quantity) {
-        cartService.getCart(cartId).getOrderItems().add(new OrderItem(cartService.getCart(cartId), productService.getProductById(productId), quantity));
+    @PutMapping(value = "/addProductToCart")
+    public CartDto addProductToCart(@RequestParam Long cartId, @RequestParam Long productId, @RequestParam int quantity) {
+        cartService.getCart(cartId).getOrderItems().add(new OrderItem(cartService.getCart(cartId), productService.getProduct(productId), quantity));
         return cartMapper.mapToCartDto(cartService.saveCart(cartService.getCart(cartId)));
     }
 
     @DeleteMapping(path = "/{cart_id}&{product_id}")
     public void deleteProduct(@PathVariable("cart_id") Long cartId, @PathVariable("product_id") Long productId) {
-        orderItemService.deleteByCartAndProduct(cartService.getCart(cartId), productService.getProductById(productId));
+        orderItemService.deleteByCartAndProduct(cartService.getCart(cartId), productService.getProduct(productId));
     }
 
     @PostMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

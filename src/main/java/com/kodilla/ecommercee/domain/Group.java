@@ -17,6 +17,7 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
     private Long id;
 
     @Column(name = "name")
@@ -25,9 +26,13 @@ public class Group {
     @JsonIgnore
     @OneToMany(
             targetEntity = Product.class,
-            mappedBy = "groupId",
+            mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     List<Product> products = new ArrayList<>();
+
+    public Group(String name) {
+        this.name = name;
+    }
 }

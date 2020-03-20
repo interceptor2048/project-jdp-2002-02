@@ -17,27 +17,27 @@ public class ProductMapper {
 
     public Product mapToProduct(final ProductDto productDto) {
         Product productBean = new Product();
-                productBean.setId(productDto.getId());
+                productBean.setProductId(productDto.getProductId());
                 productBean.setName(productDto.getName());
                 productBean.setPrice(productDto.getPrice());
                 productBean.setDescription(productDto.getDescription());
-                productBean.setGroupId(groupRepository.findById(productDto.getGroupId()).orElse(null));
+                productBean.setGroup(groupRepository.findById(productDto.getGroupId()).orElse(null));
 
         return productBean;
     }
 
     public ProductDto mapToProductDto(final Product product) {
         return new ProductDto(
-                product.getId(),
+                product.getProductId(),
                 product.getName(),
                 product.getPrice(),
                 product.getDescription(),
-                product.getGroupId().getId());
+                product.getGroup().getId());
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {
         return products.stream()
-                .map(p -> new ProductDto(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroupId().getId()))
+                .map(p -> new ProductDto(p.getProductId(), p.getName(), p.getPrice(), p.getDescription(), p.getGroup().getId()))
                 .collect(Collectors.toList());
     }
 }

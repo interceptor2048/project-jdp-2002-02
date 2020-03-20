@@ -13,6 +13,7 @@ import java.util.Optional;
 @Transactional
 @Service
 public class ProductService {
+
     @Autowired
     private ProductDao productRepository;
 
@@ -20,8 +21,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProduct(final Long id) {
-        return productRepository.findById(id);
+    public Product getProduct(final Long id) {
+        return productRepository.findById(id).orElse(null);
     }
 
     public Product saveProduct(final Product product) {
@@ -32,7 +33,4 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Product getProductById(Long productId) {
-        return productRepository.findById(productId).orElse(new Product());
     }
-}

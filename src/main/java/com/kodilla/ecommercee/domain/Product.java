@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +20,8 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id", unique = true)
+    private Long productId;
 
     @Column(name="name")
     private String name;
@@ -31,7 +34,11 @@ public class Product {
     @Length(max = 1000)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="groupId")
-    private Group groupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="group_id", referencedColumnName = "id")
+    private Group group;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItemList = new ArrayList<>();
+
 }

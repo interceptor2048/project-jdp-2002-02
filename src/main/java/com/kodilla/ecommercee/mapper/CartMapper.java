@@ -1,11 +1,10 @@
 package com.kodilla.ecommercee.mapper;
 
-
 import com.kodilla.ecommercee.dao.OrderDao;
-import com.kodilla.ecommercee.dao.UserDao;
 import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-
+import com.kodilla.ecommercee.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,10 @@ import java.util.stream.Collectors;
 public class CartMapper {
 
     @Autowired
-    UserDao userDao;
+    ProductMapper productMapper;
+
+    @Autowired
+    OrderItemMapper orderItemMapper;
 
     @Autowired
     OrderDao orderDao;
@@ -24,25 +26,34 @@ public class CartMapper {
     public Cart mapToCart(final CartDto cartDto){
         return new Cart(
                 cartDto.getId(),
-                userDao.findUserById(cartDto.getUserId()),
-                cartDto.getOrderItems(),
-                orderDao.findOrderById(cartDto.getOrderId())
+                orderItemMapper.mapToOrderItemList(cartDto.getOrderItems()),
+                getOrderWithId(cartDto.getOrderId())
                 );
     }
 
     public CartDto mapToCartDto(final Cart cart){
         return new CartDto(
                 cart.getId(),
-                cart.getUser().getId(),
-                cart.getOrderItems(),
-                cart.getOrder().getId()
+                orderItemMapper.mapToOrderItemDtoList(cart.getOrderItems()),
+                getIdFromOrder(cart.getOrder())
         );
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
         return cartList.stream()
-                .map(cart -> new CartDto(cart.getId(), cart.getUser().getId(), cart.getOrderItems(), cart.getOrder().getId()))
+                .map(this::mapToCartDto)
                 .collect(Collectors.toList());
     }
+    private Long getIdFromOrder(Order order) {
+        try {
+            return order.getId();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    private Order getOrderWithId(Long id) {
+        if (id == null || id == 0)
+            return null;
+        return orderDao.findById(id).orElse(null);
+    }
 }
-

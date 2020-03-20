@@ -40,11 +40,16 @@ public class Order {
     @Column(name="comments")
     private String comments;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="cartId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="cart_id", referencedColumnName = "id")
     private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public Order (Cart cart, User user ) {
+        this.cart = cart;
+        this. user = user;
+    }
 }

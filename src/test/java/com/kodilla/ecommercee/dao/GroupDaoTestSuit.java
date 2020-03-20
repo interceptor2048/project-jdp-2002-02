@@ -28,7 +28,7 @@ public class GroupDaoTestSuit {
                     product.setName("Jacket");
                     product.setDescription("Jacket_Description");
                     product.setPrice(new BigDecimal("100"));
-                    product.setGroupId(group);
+                    product.setGroup(group);
         group.getProducts().add(product);
         groupDao.save(group);
         Assert.assertEquals(1, groupDao.findByName("Food").size());

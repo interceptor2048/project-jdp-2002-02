@@ -32,7 +32,7 @@ public class ProductController {
 
     @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getProduct(@PathVariable("id") Long id) throws NotFoundException {
-        return productMapper.mapToProductDto(productService.getProduct(id).orElseThrow(NotFoundException::new));
+        return productMapper.mapToProductDto(productService.getProduct(id));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

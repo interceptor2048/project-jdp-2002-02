@@ -29,7 +29,7 @@ public class ProductDaoTestSuite {
                 product.setName("Jacket");
                 product.setDescription("Jacket_Description");
                 product.setPrice(new BigDecimal("100"));
-                product.setGroupId(group);
+                product.setGroup(group);
         productDao.save(product);
 
         Assert.assertEquals(1, productDao.findByName("Jacket").size());
