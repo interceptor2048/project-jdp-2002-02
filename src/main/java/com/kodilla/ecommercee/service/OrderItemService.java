@@ -43,4 +43,3 @@ public class OrderItemService {
         orderItemRepository.deleteByCartAndProduct(cartId, productId);
     }
 }
-

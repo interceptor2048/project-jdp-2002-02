@@ -1,8 +1,4 @@
 package com.kodilla.ecommercee.controller;
-import com.kodilla.ecommercee.dao.CartDao;
-import com.kodilla.ecommercee.dao.OrderDao;
-import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderItem;
 import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
