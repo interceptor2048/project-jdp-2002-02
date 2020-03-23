@@ -34,11 +34,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto save(UserDto appUserDto) {
-        log.debug("Request to save User : {}", appUserDto);
-        User appUser = userMapper.toEntity(appUserDto);
-        appUser = userDao.save(appUser);
-        return userMapper.toDto(appUser);
+    public UserDto save(UserDto user) {
+        log.debug("Request to save User : {}", user);
+        User userEntity = userMapper.toEntity(user);
+        return userMapper.toDto(userEntity);
     }
 
     @Override
@@ -62,5 +61,11 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         log.debug("Request to delete User : {}", id);
         userDao.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        log.debug("Request to delete all Users : {}");
+        userDao.deleteAll();
     }
 }

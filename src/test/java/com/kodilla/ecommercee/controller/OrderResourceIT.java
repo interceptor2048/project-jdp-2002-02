@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kodilla.ecommercee.Utils.OrderEntityObjectCreator;
+import com.kodilla.ecommercee.dao.OrderDao;
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.mapper.OrderMapper;
-import com.kodilla.ecommercee.repository.OrderRepository;
 
 import com.kodilla.ecommercee.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItemInArray;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -35,45 +34,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OrderResourceIT {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderDao orderRepository;
 
     @Autowired
     private OrderMapper orderMapper;
 
     ObjectMapper objectMapper;
 
-    private static ObjectMapper createObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
-    }
-
-    private static String DEFAULT_NUMBER = "123";
-
-    private static LocalDate DEFAULT_ORDER_DATE = LocalDate.now();
-
-    private static LocalDate DEFAULT_REQUIRED_DATE = LocalDate.now().plusDays(1L);
-
-    private static LocalDate DEFAULT_SHIPPED_DATE = LocalDate.now().plusDays(2L);
-
-    private static String DEFAULT_COMMENTS = "Default comment";
-
-    private static int DEFAULT_STATUS = 1;
-
-    private static String UPDATED_NUMBER = "123";
-
-    private static LocalDate UPDATED_ORDER_DATE = LocalDate.now().plusDays(1L);
-
-    private static LocalDate UPDATED_REQUIRED_DATE = LocalDate.now().plusDays(10L);
-
-    private static LocalDate UPDATED_SHIPPED_DATE = LocalDate.now().plusDays(20L);
-
-    private static String UPDATED_COMMENTS = "Updated comment";
-
-    private static int UPDATED_STATUS = 2;
-    
     @Autowired
     private OrderService orderService;
 
@@ -84,6 +51,14 @@ public class OrderResourceIT {
 
     private Order order;
 
+    private static ObjectMapper createObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.registerModule(new JavaTimeModule());
+        return mapper;
+    }
+
     @BeforeEach
     public void setup() {
         objectMapper = createObjectMapper();
@@ -93,33 +68,9 @@ public class OrderResourceIT {
                 .build();
     }
 
-    private static Order createEntity() {
-      return Order.builder()
-                .number(DEFAULT_NUMBER)
-                .requiredDate(DEFAULT_REQUIRED_DATE)
-                .shippedDate(DEFAULT_SHIPPED_DATE)
-                .orderDate(DEFAULT_ORDER_DATE)
-                .comments(DEFAULT_COMMENTS)
-                .status(DEFAULT_STATUS)
-                .build();
-    }
-
-    private static Order createUpdatedEntityWithGivenId(Long id) {
-        return Order.builder()
-                .id(id)
-                .number(UPDATED_NUMBER)
-                .requiredDate(UPDATED_REQUIRED_DATE)
-                .shippedDate(UPDATED_SHIPPED_DATE)
-                .orderDate(UPDATED_ORDER_DATE)
-                .comments(UPDATED_COMMENTS)
-                .status(UPDATED_STATUS)
-                .status(1)
-                .build();
-    }
-
     @BeforeEach
     public void initTest() {
-        order = createEntity();
+        order = OrderEntityObjectCreator.createEntity();
     }
 
     @Test
@@ -220,7 +171,7 @@ public class OrderResourceIT {
         // Disconnect from session so that the updates on updatedOrder are not directly saved in db
         em.detach(orderToUpdate);
 
-        orderToUpdate = createUpdatedEntityWithGivenId(orderToUpdate.getId());
+        orderToUpdate = OrderEntityObjectCreator.createUpdatedEntityWithGivenId(orderToUpdate.getId());
 
         OrderDto orderDTO = orderMapper.toDto(orderToUpdate);
 

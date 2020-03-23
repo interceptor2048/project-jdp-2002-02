@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kodilla.ecommercee.Utils.UserEntityObjectCreator;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.dao.UserDao;
@@ -63,28 +64,9 @@ public class UserControllerIT {
                 .build();
     }
 
-    public static User createEntity() {
-        User user = User.builder()
-                .userKey(DEFAULT_USER_KEY)
-                .status(DEFAULT_STATUS)
-                .username(DEFAULT_USER_NAME)
-                .build();
-        return user;
-    }
-
-    public static User createUpdatedEntity() {
-        User user = User.builder()
-                .username(UPDATED_USER_NAME)
-                .status(UPDATED_STATUS)
-                .userKey(UPDATED_USER_KEY)
-                .build();
-
-        return user;
-    }
-
     @BeforeEach
     public void initTest() {
-        user = createEntity();
+        user = UserEntityObjectCreator.createEntity();
     }
 
     @Test

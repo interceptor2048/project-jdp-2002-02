@@ -1,15 +1,15 @@
 package com.kodilla.ecommercee.domain.dto;
 
+import com.kodilla.ecommercee.domain.Product;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemDto {
     private Long id;
-    private Long cart;
-    private Long productId;
+    private Product product;
     private int quantity;
 }
