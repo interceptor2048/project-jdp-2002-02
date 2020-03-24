@@ -1,10 +1,9 @@
 package com.kodilla.ecommercee.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,25 +13,25 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "carts")
-public class Cart {
+public class Cart implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
     private User user;
 
-    @JsonIgnore
+    @Builder.Default
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
     )
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(mappedBy = "cart")
+    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
     private Order order;
    }

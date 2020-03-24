@@ -22,11 +22,10 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
+    @Builder.Default
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "groupId",
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     List<Product> products = new ArrayList<>();

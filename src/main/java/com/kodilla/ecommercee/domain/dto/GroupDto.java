@@ -17,7 +17,5 @@ public class GroupDto {
 
     private Long id;
     private String name;
-    @JsonIgnore
     private List<Product> products;
-
 }

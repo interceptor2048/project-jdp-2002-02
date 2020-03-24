@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface UserService {
     Optional<UserDto> findOne(Long id);
 
     void delete(Long id);
+
+    void deleteAll();
 }

@@ -21,7 +21,7 @@ public class CartMapper {
     @Autowired
     OrderDao orderDao;
 
-    public Cart mapToCart(final CartDto cartDto){
+    public Cart toEntity(final CartDto cartDto){
         return new Cart(
                 cartDto.getId(),
                 userDao.findUserById(cartDto.getUserId()),
@@ -29,20 +29,27 @@ public class CartMapper {
                 orderDao.findOrderById(cartDto.getOrderId())
                 );
     }
-
-    public CartDto mapToCartDto(final Cart cart){
-        return new CartDto(
-                cart.getId(),
-                cart.getUser().getId(),
-                cart.getOrderItems(),
-                cart.getOrder().getId()
-        );
+    public CartDto toDto(final Cart cart){
+        CartDto cartBean = new CartDto();
+        if(cart.getUser() == null) {
+            cartBean.setUserId(null);
+        }
+        else {
+            cartBean.setUserId(cart.getUser().getId());
+        }
+        if(cart.getOrder()== null) {
+            cartBean.setOrderId(null);
+        }
+        else {
+            cartBean.setOrderId(cart.getOrder().getId());
+        }
+        cartBean.setId(cart.getId());
+        return cartBean;
     }
-
-    public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
+    public List<CartDto> toDto(final List<Cart> cartList){
         return cartList.stream()
-                .map(cart -> new CartDto(cart.getId(), cart.getUser().getId(), cart.getOrderItems(), cart.getOrder().getId()))
+                .map(cart ->
+                        toDto(cart))
                 .collect(Collectors.toList());
     }
 }
-

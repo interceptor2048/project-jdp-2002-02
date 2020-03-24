@@ -1,8 +1,8 @@
 package com.kodilla.ecommercee.service.impl;
 
+import com.kodilla.ecommercee.dao.OrderDao;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
-import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.service.OrderService;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import org.slf4j.Logger;
@@ -22,11 +22,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
-    private final OrderRepository orderRepository;
+    private final OrderDao orderRepository;
 
     private final OrderMapper orderMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper) {
+    public OrderServiceImpl(OrderDao orderRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
     }

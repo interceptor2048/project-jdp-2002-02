@@ -21,4 +21,6 @@ public class ProductDto {
     private String description;
 
     private Long groupId;
+
+    private boolean available;
 }
