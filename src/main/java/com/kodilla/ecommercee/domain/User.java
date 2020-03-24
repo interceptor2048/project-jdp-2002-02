@@ -34,6 +34,7 @@ public class User {
         this.userKey = RandomStringUtils.random(5, false, true);
     }
 
+    @Builder.Default
     @OneToMany(
             targetEntity= Order.class,
             mappedBy="user",

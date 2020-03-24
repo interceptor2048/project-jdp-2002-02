@@ -49,8 +49,8 @@ public class CartController {
                .body(cartSaved);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCart(@PathVariable Long cartId) throws CartExceptionNotFound{
+    @DeleteMapping(path ="/{id}")
+    public ResponseEntity<?> deleteCart(@PathVariable("id") Long cartId) throws CartExceptionNotFound{
         if(cartId == null) {
             throw new IllegalArgumentException("Passed arguments are equal null");
         }

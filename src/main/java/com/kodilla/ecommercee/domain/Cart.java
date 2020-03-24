@@ -23,6 +23,7 @@ public class Cart implements Serializable {
     @JoinColumn(name="userId")
     private User user;
 
+    @Builder.Default
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "cart",

@@ -19,6 +19,7 @@ public class CartDto {
 
     private Long userId;
 
+    @Builder.Default
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private Long orderId;
